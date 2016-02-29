@@ -36,7 +36,7 @@ export default DS.Model.extend({
           ));
   }),
 
-  afterTax: Ember.computed('yearly', 'per', function() {
+  afterTax: Ember.computed('yearly', function() {
     var yearly = this.get('yearly');
     return (yearly * 0.8).toFixed(2);
   }),
