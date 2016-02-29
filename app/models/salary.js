@@ -29,6 +29,13 @@ export default DS.Model.extend({
     return this.get('amount') * multiplier;
   }),
 
+  allowance: Ember.computed('yearly', function() {
+    let basic = 10600;
+    return parseInt(Math.max(0,
+          basic-Math.max(0, (this.get('yearly')-100000)/2)
+          ));
+  }),
+
   afterTax: Ember.computed('yearly', 'per', function() {
     var yearly = this.get('yearly');
     return (yearly * 0.8).toFixed(2);

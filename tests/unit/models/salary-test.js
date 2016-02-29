@@ -26,3 +26,22 @@ test('multipliers', function(assert) {
     assert.equal(model.get('yearly'), 5200);
   });
 });
+
+test('allowance', function(assert) {
+  let model = this.subject();
+  let cases = [
+    [1, 10600],
+    [50000, 10600],
+    [100000, 10600],
+    [100002, 10599],
+    [121200, 0],
+  ];
+  Ember.run(function(){
+    model.set('per', 'year');
+    cases.forEach(function(c) {
+      model.set('amount', c[0]);
+      assert.equal(model.get('allowance'), c[1],
+          'Salary: '+c[0]+', Allowance: '+c[1]);
+    });
+  });
+});
