@@ -1,9 +1,6 @@
 import DS from "ember-data";
 import Ember from 'ember';
 
-var component = DS.Model.extend({
-
-});
 
 export default DS.Model.extend({
   amount: DS.attr('number'),
