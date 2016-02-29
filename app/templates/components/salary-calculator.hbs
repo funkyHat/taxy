@@ -1,0 +1,7 @@
+<page class="salary">
+  <form>
+    {{input value=(mut (get salary 'amount'))}}
+    {{input value=(get salary 'afterTax') disabled="true"}}
+  </form>
+  {{yield}}
+</page>
