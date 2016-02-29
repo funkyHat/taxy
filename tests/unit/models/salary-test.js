@@ -53,6 +53,8 @@ test('NI', function(assert) {
     [8060, 0],
     [8061, 0.12],
     [8160, 12],
+    [42385, 4119],
+    [42386, 4119.02],
   ];
   Ember.run(function(){
     model.set('per', 'year');
