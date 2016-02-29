@@ -11,8 +11,8 @@ export default DS.Model.extend({
 
   yearly: Ember.computed('amount', 'per', function() {
     //updated on the fly when the inputs are changed
-    var per = this.get('per');
-    var multiplier;
+    let per = this.get('per');
+    let multiplier;
     switch (per) {
       case 'year':
         multiplier = 1;
@@ -36,8 +36,27 @@ export default DS.Model.extend({
           ));
   }),
 
+  NI: Ember.computed('yearly', function() {
+    let threshold = 8060;
+    let upperLimit = 42385;
+    let yearly = this.get('yearly');
+    let above, below;
+    if (yearly <= threshold) {
+      return 0;
+    } else {
+      if (yearly > upperLimit) {
+        above = 0.02 * (yearly - upperLimit);
+        below = 0.12 * (upperLimit - threshold);
+      } else {
+        above = 0;
+        below = 0.12 * (yearly - threshold);
+      }
+      return above + below;
+    }
+  }),
+
   afterTax: Ember.computed('yearly', function() {
-    var yearly = this.get('yearly');
+    let yearly = this.get('yearly');
     return (yearly * 0.8).toFixed(2);
   }),
 });

@@ -45,3 +45,21 @@ test('allowance', function(assert) {
     });
   });
 });
+
+test('NI', function(assert) {
+  let model = this.subject();
+  let cases = [
+    [1, 0],
+    [8060, 0],
+    [8061, 0.12],
+    [8160, 12],
+  ];
+  Ember.run(function(){
+    model.set('per', 'year');
+    cases.forEach(function(c) {
+      model.set('amount', c[0]);
+      assert.equal(model.get('NI'), c[1],
+          'Salary: '+c[0]+', NI: '+c[1]);
+    });
+  });
+});
